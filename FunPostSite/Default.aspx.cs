@@ -18,6 +18,27 @@ public partial class _Default : System.Web.UI.Page
           }
     }
 
+    //StringBuilder sb = new StringBuilder();
+    //sb.Append(@"<table>
+    // <tr>
+    //     <td>
+    //      some text written in 1st td
+    //                            </td>
+    //                            <td>
+    //                                some text written in 2nd td
+    //                            </td>
+    //                        </tr>
+    //                        <tr>
+    //                            <td>
+    //                                <input id='btn' type='button' value='click me' />
+    //                            </td>
+    //                            <td>
+    //                                <input id='txt' type='text' value='enter in me' />
+    //                            </td>
+    //                        </tr>
+    //                    </table>"
+    //                );
+    //            Response.Write(sb.ToString());
 
 
     protected void newpostbtn_click(object sender, EventArgs e)
