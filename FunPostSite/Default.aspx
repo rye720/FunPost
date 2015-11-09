@@ -8,8 +8,12 @@
 </head>
 <body>
     <form id="form1" runat="server">
+
     <div>
     
+        <asp:Button runat="server" Text="New Post" onserverclick="newpostbutton_click"></asp:Button>
+
+
     </div>
     </form>
 </body>
