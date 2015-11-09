@@ -11,19 +11,18 @@
 
         <div>
 
-            <asp:Button runat="server" Text="New Post" onserverclick="newpostbtn_click"></asp:Button>
+            <asp:Button runat="server" Text="New Post" onclick="newpostbtn_click"></asp:Button>
 
             </div>
             
         <!-- Create Post Section -->
             
-            <asp:PlaceHolder runat="server" ID="newPost" Visible ="false">
+            <asp:PlaceHolder runat="server" id="newPost" Visible ="false">
 
             <div style="border: 2px">
-
-                <asp:TextBox runat="server"></asp:TextBox>
-
-                <asp:Button runat="server" Text="Submit" onserverclick="submitbtn_click"></asp:Button>
+                <input type="text" runat="server" id="title" />
+                 <input type="file" runat="server" id="pic" accept=".gif,.jpg,.tif" required="required" />
+                <asp:button runat="server" Text="submit" onclick="submitbtn_click" />
 
             </div>
 
