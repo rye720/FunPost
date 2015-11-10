@@ -27,8 +27,7 @@
             </div>
 
             </asp:PlaceHolder>
-               <asp:PlaceHolder runat="server" id="Post" Visible ="true">
-               </asp:PlaceHolder>
+         <div id="post" runat="server"></div>
 
         
     </form>

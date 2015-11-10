@@ -12,10 +12,15 @@ public partial class _Default : System.Web.UI.Page
      {
           DirectoryInfo di = new DirectoryInfo(Server.MapPath("~/Appdata"));
           var directories = di.GetFiles("*", SearchOption.AllDirectories);
+          String done="";
           foreach (FileInfo d in directories)
           {
-               Post.
+               done+="<h1>"+d.Name.Substring(0,d.Name.IndexOf("."))+"</h1>";
+               done += "<hr>";
+               done += "<img src=\"" + d.FullName + "\">";
+               done += "<hr size=\"15\">";
           }
+          post.InnerHtml = done;
     }
 
     //StringBuilder sb = new StringBuilder();
