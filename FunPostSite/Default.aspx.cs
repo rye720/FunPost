@@ -17,33 +17,15 @@ public partial class _Default : System.Web.UI.Page
           {
                done+="<h1>"+d.Name.Substring(0,d.Name.IndexOf("."))+"</h1>";
                done += "<hr>";
-               done += "<img src=\"" + d.FullName + "\">";
+               done += "<img src=\"../Appdata/"+ d.Name + "\">";
+               done+="<asp:PlaceHolder runat=\"server\" ID=\"" + d.Name + "\" Visible =\"false\">";
+               done+="<input type=\"file\" runat=\"server\" id=\""+d.Name+"\" accept=\".gif,.jpg,.tif\" required=\"required\" />";
+               done +="<asp:button runat=\"server\" ID=\""+d.Name +"Text=\"submit\" onclick=\"comment_click\" />";
+               done +="</asp:PlaceHolder>";
                done += "<hr size=\"15\">";
           }
           post.InnerHtml = done;
     }
-
-    //StringBuilder sb = new StringBuilder();
-    //sb.Append(@"<table>
-    // <tr>
-    //     <td>
-    //      some text written in 1st td
-    //                            </td>
-    //                            <td>
-    //                                some text written in 2nd td
-    //                            </td>
-    //                        </tr>
-    //                        <tr>
-    //                            <td>
-    //                                <input id='btn' type='button' value='click me' />
-    //                            </td>
-    //                            <td>
-    //                                <input id='txt' type='text' value='enter in me' />
-    //                            </td>
-    //                        </tr>
-    //                    </table>"
-    //                );
-    //            Response.Write(sb.ToString());
 
 
     protected void newpostbtn_click(object sender, EventArgs e)
@@ -60,5 +42,16 @@ public partial class _Default : System.Web.UI.Page
         var path = Path.Combine(Server.MapPath("~/Appdata"), t+r);
         image.SaveAs(path);
     }
+     /*
+    protected void comment_click(object sender, EventArgs e)
+    {
+         Button c=(Button)sender;
+         Application.Contents;
+         HttpPostedFile image =
+         var path = Path.Combine(Server.MapPath("~/Appdata"), t + r);
+         image.SaveAs(path);
+         
+    }
+      * */
 
 }
