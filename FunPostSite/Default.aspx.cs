@@ -5,9 +5,16 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
-
+/// <summary>
+/// server side control
+/// </summary>
 public partial class _Default : System.Web.UI.Page
 {
+     /// <summary>
+     /// output all the posts that are currently stored in the directory
+     /// </summary>
+     /// <param name="sender"></param>
+     /// <param name="e"></param>
     protected void Page_Load(object sender, EventArgs e)
      {
           DirectoryInfo di = new DirectoryInfo(Server.MapPath("~/Appdata"));
@@ -27,12 +34,21 @@ public partial class _Default : System.Web.UI.Page
           post.InnerHtml = done;
     }
 
-
+     /// <summary>
+     /// make the new post form appear
+     /// </summary>
+     /// <param name="sender"></param>
+     /// <param name="e"></param>
     protected void newpostbtn_click(object sender, EventArgs e)
     {
         newPost.Visible = true;
         unhide.Visible = false;
     }
+     /// <summary>
+     /// stored the title of the post and the picture post into local directory(name the picture file as the title of the post from the textbox
+     /// </summary>
+     /// <param name="sender"></param>
+     /// <param name="e"></param>
     protected void submitbtn_click(object sender, EventArgs e)
     {
          unhide.Visible = true;
@@ -45,16 +61,21 @@ public partial class _Default : System.Web.UI.Page
         image.SaveAs(path);
         Page_Load(sender, e);
     }
-     /*
+     
+     /// <summary>
+     /// unfinished comment method after comment button clicked
+     /// </summary>
+     /// <param name="sender"></param>
+     /// <param name="e"></param>
     protected void comment_click(object sender, EventArgs e)
     {
          Button c=(Button)sender;
-         Application.Contents;
-         HttpPostedFile image =
-         var path = Path.Combine(Server.MapPath("~/Appdata"), t + r);
-         image.SaveAs(path);
+         ///Application.Contents;
+         HttpPostedFile image;
+         ///var path = Path.Combine(Server.MapPath("~/Appdata"), t + r);
+         ///image.SaveAs(path);
          
     }
-      * */
+
 
 }
