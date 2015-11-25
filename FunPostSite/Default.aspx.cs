@@ -18,10 +18,10 @@ public partial class _Default : System.Web.UI.Page
                done+="<h1>"+d.Name.Substring(0,d.Name.IndexOf("."))+"</h1>";
                done += "<hr>";
                done += "<img src=\"../Appdata/"+ d.Name + "\">";
-               done+="<asp:PlaceHolder runat=\"server\" ID=\"" + d.Name + "\" Visible =\"false\">";
-               done+="<input type=\"file\" runat=\"server\" id=\""+d.Name+"\" accept=\".gif,.jpg,.tif\" required=\"required\" />";
-               done +="<asp:button runat=\"server\" ID=\""+d.Name +"Text=\"submit\" onclick=\"comment_click\" />";
-               done +="</asp:PlaceHolder>";
+               //done+="<asp:PlaceHolder runat=\"server\" ID=\"" + d.Name + "\" Visible =\"false\">";
+               //done+="<input type=\"file\" runat=\"server\" id=\""+d.Name+"\" accept=\".gif,.jpg,.tif\"/>";
+               //done +="<asp:button runat=\"server\" ID=\""+d.Name +"Text=\"submit\" onclick=\"comment_click\" />";
+               //done +="</asp:PlaceHolder>";
                done += "<hr size=\"15\">";
           }
           post.InnerHtml = done;
@@ -31,9 +31,11 @@ public partial class _Default : System.Web.UI.Page
     protected void newpostbtn_click(object sender, EventArgs e)
     {
         newPost.Visible = true;
+        unhide.Visible = false;
     }
     protected void submitbtn_click(object sender, EventArgs e)
     {
+         unhide.Visible = true;
         newPost.Visible = false;
         String t = title.Value;
         HttpPostedFile image=pic.PostedFile;
@@ -41,6 +43,7 @@ public partial class _Default : System.Web.UI.Page
         String r = image.FileName.Substring(s);
         var path = Path.Combine(Server.MapPath("~/Appdata"), t+r);
         image.SaveAs(path);
+        Page_Load(sender, e);
     }
      /*
     protected void comment_click(object sender, EventArgs e)
