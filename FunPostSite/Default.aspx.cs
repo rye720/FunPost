@@ -52,8 +52,7 @@ public partial class _Default : System.Web.UI.Page
      /// <param name="e"></param>
     protected void submitbtn_click(object sender, EventArgs e)
     {
-         unhide.Visible = true;
-        newPost.Visible = false;
+         
          bool validate =false;
         String t = ti.Value;
         HttpPostedFile image=pic.PostedFile;
@@ -72,6 +71,8 @@ public partial class _Default : System.Web.UI.Page
          }
          if (validate)
          {
+              unhide.Visible = true;
+              newPost.Visible = false;
               int s = image.FileName.IndexOf(".");
               String r = image.FileName.Substring(s);
               var path = Path.Combine(Server.MapPath("~/Appdata"), t + r);
