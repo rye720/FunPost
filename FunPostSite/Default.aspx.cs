@@ -56,10 +56,14 @@ public partial class _Default : System.Web.UI.Page
          bool validate =false;
         String t = ti.Value;
         HttpPostedFile image=pic.PostedFile;
-         String ext =Path.GetExtension(t);
+        int s = image.FileName.IndexOf(".");
+         String ext =image.FileName.Substring(s);
          switch (ext)
          {
               case ".jpg" :
+                   validate = true;
+                   break;
+              case ".JPG":
                    validate = true;
                    break;
               case ".tif" :
@@ -73,11 +77,10 @@ public partial class _Default : System.Web.UI.Page
          {
               unhide.Visible = true;
               newPost.Visible = false;
-              int s = image.FileName.IndexOf(".");
               String r = image.FileName.Substring(s);
               var path = Path.Combine(Server.MapPath("~/Appdata"), t + r);
               image.SaveAs(path);
-              info.InnerHtml = "";
+              info.InnerHtml = " ";
               Page_Load(sender, e);
          }
          else
