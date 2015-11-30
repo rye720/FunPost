@@ -1,7 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default"  %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Fun Post</title>
@@ -16,11 +15,11 @@
             </div>
             
         <!-- Create Post Section -->
-            
+            <label id="info" runat="server"></label>
             <asp:PlaceHolder runat="server" id="newPost" Visible ="false">
 
             <div style="border: 2px">
-                <h3>Please enter a title for your post in the text box below</h3><input type="text" runat="server" id="title" required="required" />
+                <h3>Please enter a title for your post in the text box below</h3><input type="text" runat="server" id="ti" required="required" />
                  <br />
                  <h3>Please select an image to upload<img src ="../need/question.jpg" width="20" height="20"  title="You may currently only upload an image of these types: .jpg, .gif, .tif" />
 </h3>

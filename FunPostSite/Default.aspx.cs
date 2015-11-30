@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
+using System.Data.SqlClient;
 /// <summary>
 /// server side control
 /// </summary>
@@ -53,13 +54,35 @@ public partial class _Default : System.Web.UI.Page
     {
          unhide.Visible = true;
         newPost.Visible = false;
-        String t = title.Value;
+         bool validate =false;
+        String t = ti.Value;
         HttpPostedFile image=pic.PostedFile;
-        int s=image.FileName.IndexOf(".");
-        String r = image.FileName.Substring(s);
-        var path = Path.Combine(Server.MapPath("~/Appdata"), t+r);
-        image.SaveAs(path);
-        Page_Load(sender, e);
+         String ext =Path.GetExtension(t);
+         switch (ext)
+         {
+              case ".jpg" :
+                   validate = true;
+                   break;
+              case ".tif" :
+                   validate = true;
+                   break;
+              case ".gif" :
+                   validate = true;
+                   break;
+         }
+         if (validate)
+         {
+              int s = image.FileName.IndexOf(".");
+              String r = image.FileName.Substring(s);
+              var path = Path.Combine(Server.MapPath("~/Appdata"), t + r);
+              image.SaveAs(path);
+              info.InnerHtml = "";
+              Page_Load(sender, e);
+         }
+         else
+              info.InnerHtml = "Please select an image file with the extension of jpg, gif, or tif";
+              
+              
     }
      
      /// <summary>
@@ -71,11 +94,80 @@ public partial class _Default : System.Web.UI.Page
     {
          Button c=(Button)sender;
          ///Application.Contents;
-         HttpPostedFile image;
+         //HttpPostedFile image;
          ///var path = Path.Combine(Server.MapPath("~/Appdata"), t + r);
          ///image.SaveAs(path);
          
     }
+     /// <summary>
+     /// store files in database from website
+     /// </summary>
+     /// <param name="sender"></param>
+     /// <param name="e"></param>
+     /*
+    protected void btnUpload_Click(object sender, EventArgs e)
+    {
+         // Read the file and convert it to Byte Array
+         string filePath = pic.PostedFile.FileName;
+         string filename = Path.GetFileName(filePath);
+         string ext = Path.GetExtension(filename);
+         string contenttype = String.Empty;
+
+         //Set the contenttype based on File Extension
+         switch (ext)
+         {
+              case ".doc":
+                   contenttype = "application/vnd.ms-word";
+                   break;
+              case ".docx":
+                   contenttype = "application/vnd.ms-word";
+                   break;
+              case ".xls":
+                   contenttype = "application/vnd.ms-excel";
+                   break;
+              case ".xlsx":
+                   contenttype = "application/vnd.ms-excel";
+                   break;
+              case ".jpg":
+                   contenttype = "image/jpg";
+                   break;
+              case ".png":
+                   contenttype = "image/png";
+                   break;
+              case ".gif":
+                   contenttype = "image/gif";
+                   break;
+              case ".pdf":
+                   contenttype = "application/pdf";
+                   break;
+         }
+         if (contenttype != String.Empty)
+         {
+
+              Stream fs = pic.PostedFile.InputStream;
+              BinaryReader br = new BinaryReader(fs);
+              Byte[] bytes = br.ReadBytes((Int32)fs.Length);
+
+              //insert the file into database
+              string strQuery = "insert into tblFiles(Name, ContentType, Data)" +
+                 " values (@Name, @ContentType, @Data)";
+              SqlCommand cmd = new SqlCommand(strQuery);
+              cmd.Parameters.Add("@Name", SqlDbType.VarChar).Value = filename;
+              cmd.Parameters.Add("@ContentType", SqlDbType.VarChar).Value
+                = contenttype;
+              cmd.Parameters.Add("@Data", SqlDbType.Binary).Value = bytes;
+              InsertUpdateData(cmd);
+              lblMessage.ForeColor = System.Drawing.Color.Green;
+              lblMessage.Text = "File Uploaded Successfully";
+         }
+         else
+         {
+              lblMessage.ForeColor = System.Drawing.Color.Red;
+              lblMessage.Text = "File format not recognised." +
+                " Upload Image/Word/PDF/Excel formats";
+         }
+    }
+      * */
 
 
 }
