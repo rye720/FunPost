@@ -7,4 +7,4 @@
 |Post new Post|4|8| Adam/Leo
 |CSS|3|3|Damon
 | limit comments to images only|3|not done|
-| Use Azure to host website |3| not done - Adam|
+| Use Azure to host website |3| not done |Adam|
