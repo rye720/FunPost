@@ -25,7 +25,7 @@ public partial class _Default : System.Web.UI.Page
           {
                done+="<h1>"+d.Name.Substring(0,d.Name.IndexOf("."))+"</h1>";
                done += "<hr>";
-               done += "<img src=\"../Appdata/"+ d.Name + "\">";
+               done += "<img src=\"../Appdata/"+ d.Name + "\" width=\"500\" height=\"500\"/>";
                //done+="<asp:PlaceHolder runat=\"server\" ID=\"" + d.Name + "\" Visible =\"false\">";
                //done+="<input type=\"file\" runat=\"server\" id=\""+d.Name+"\" accept=\".gif,.jpg,.tif\"/>";
                //done +="<asp:button runat=\"server\" ID=\""+d.Name +"Text=\"submit\" onclick=\"comment_click\" />";
@@ -57,29 +57,13 @@ public partial class _Default : System.Web.UI.Page
         String t = ti.Value;
         HttpPostedFile image=pic.PostedFile;
         int s = image.FileName.IndexOf(".");
-         String ext =image.FileName.Substring(s);
-         switch (ext)
-         {
-              case ".jpg" :
-                   validate = true;
-                   break;
-              case ".JPG":
-                   validate = true;
-                   break;
-              case ".tif" :
-                   validate = true;
-                   break;
-              case ".gif" :
-                   validate = true;
-                   break;
-         }
+        validate = FilePar.validate(image);
          if (validate)
          {
               unhide.Visible = true;
               newPost.Visible = false;
-              String r = image.FileName.Substring(s);
-              var path = Path.Combine(Server.MapPath("~/Appdata"), t + r);
-              image.SaveAs(path);
+              var path = Server.MapPath("~/Appdata/");
+              FilePar.saveFile(t, image, path);
               info.InnerHtml = " ";
               Page_Load(sender, e);
          }
