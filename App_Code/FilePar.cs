@@ -10,9 +10,6 @@ public class FilePar
 {
 	public FilePar()
 	{
-		//
-		// TODO: Add constructor logic here
-		//
 	}
      public static bool validate(HttpPostedFile a)
      {
