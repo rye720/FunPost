@@ -2,8 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.IO;
+using FileNS;
 namespace UnitTestProject1
 {
     [TestClass]
@@ -12,7 +12,10 @@ namespace UnitTestProject1
         [TestMethod]
         public void Testvalidate()
         {
-            HttpPostedFile a;
+             byte[] file = File.ReadAllBytes(@"~\face.JPG");
+             Assert.IsTrue(FilePar.validate(file));
+             byte[] f = File.ReadAllBytes(@"~\wod.docx");
+             Assert.IsFalse(FilePar.validate(f));
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using System.Data.SqlClient;
+using FileNS;
 /// <summary>
 /// server side control
 /// </summary>
@@ -57,13 +58,19 @@ public partial class _Default : System.Web.UI.Page
         String t = ti.Value;
         HttpPostedFile image=pic.PostedFile;
         int s = image.FileName.IndexOf(".");
-        validate = FilePar.validate(image);
+        byte[] buffer = new byte[image.ContentLength];
+        image.InputStream.Read(buffer, 0, image.ContentLength);
+        validate = FilePar.validate(buffer);
+        String ext = image.FileName.Substring(s);
+        ext = ext.ToLower();
+        if (validate && !String.Equals(ext, ".jpg") && !String.Equals(ext, ".gif") && !String.Equals(ext, "jpeg") && !String.Equals(ext, ".tif"))
+             validate = false;
          if (validate)
          {
               unhide.Visible = true;
               newPost.Visible = false;
               var path = Server.MapPath("~/Appdata/");
-              FilePar.saveFile(t, image, path);
+              FilePar.saveFile(t, buffer, path);
               info.InnerHtml = " ";
               Page_Load(sender, e);
          }
