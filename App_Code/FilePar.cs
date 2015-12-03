@@ -28,10 +28,18 @@ namespace FileNS
              return true; 
         }
 
-        public static void saveFile(String title, byte[] s, String serverPath)
+        public static bool saveFile(String title, byte[] s, String serverPath)
         {
-            var path = serverPath + title + ".jpeg";
-            File.WriteAllBytes(path, s);
+             try
+             {
+                  var path = serverPath + title + ".jpeg";
+                  File.WriteAllBytes(path, s);
+                  return true;
+             }
+             catch (Exception)
+             {
+                  return false;
+             }
         }
     }
 }
